@@ -1,0 +1,10 @@
+Package: com.machport.arch
+Name: Arch
+Depends: mobilesubstrate, preferenceloader, com.spark.libsparkapplist
+Architecture: iphoneos-arm
+Description: Restrics access to certain apps, Configurable in settings
+Maintainer: machport
+Author: machport
+Section: Tweaks
+Version: 1.2.1
+Installed-Size: 592

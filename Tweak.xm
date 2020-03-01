@@ -27,6 +27,25 @@ AVAudioPlayer *player;
 @interface SBReusableSnapshotItemContainer : UIView
 @property (retain, nonatomic) SBAppLayout* snapshotAppLayout;
 @end
+@interface CCUILabeledRoundButton
+@property (nonatomic, copy, readwrite) NSString *title;
+@end
+@interface SBWiFiManager
+-(id)sharedInstance;
+-(void)setWiFiEnabled:(BOOL)enabled;
+-(bool)wiFiEnabled;
+@end
+
+@interface BluetoothManager
+-(id)sharedInstance;
+-(void)setEnabled:(BOOL)enabled;
+-(bool)enabled;
+
+-(void)setPowered:(BOOL)powered;
+-(bool)powered;
+
+@end
+
 NSString *swipeAppId;
 %hook SBAppSwitcherReusableSnapshotView
 - (void)layoutSubviews {
