@@ -68,138 +68,10 @@ AVAudioPlayer *player;
 #define _LOGOS_RETURN_RETAINED
 #endif
 
-@class SBAppSwitcherReusableSnapshotView; @class SBAppSwitcherPageView; @class CCUILabeledRoundButton; @class BluetoothManager; @class SBUIController; @class SBWiFiManager; 
-static void (*_logos_orig$_ungrouped$CCUILabeledRoundButton$buttonTapped$)(_LOGOS_SELF_TYPE_NORMAL CCUILabeledRoundButton* _LOGOS_SELF_CONST, SEL, id); static void _logos_method$_ungrouped$CCUILabeledRoundButton$buttonTapped$(_LOGOS_SELF_TYPE_NORMAL CCUILabeledRoundButton* _LOGOS_SELF_CONST, SEL, id); static void (*_logos_orig$_ungrouped$SBAppSwitcherReusableSnapshotView$layoutSubviews)(_LOGOS_SELF_TYPE_NORMAL SBAppSwitcherReusableSnapshotView* _LOGOS_SELF_CONST, SEL); static void _logos_method$_ungrouped$SBAppSwitcherReusableSnapshotView$layoutSubviews(_LOGOS_SELF_TYPE_NORMAL SBAppSwitcherReusableSnapshotView* _LOGOS_SELF_CONST, SEL); static void (*_logos_orig$_ungrouped$SBUIController$activateApplication$fromIcon$location$activationSettings$actions$)(_LOGOS_SELF_TYPE_NORMAL SBUIController* _LOGOS_SELF_CONST, SEL, id, id, long long, id, id); static void _logos_method$_ungrouped$SBUIController$activateApplication$fromIcon$location$activationSettings$actions$(_LOGOS_SELF_TYPE_NORMAL SBUIController* _LOGOS_SELF_CONST, SEL, id, id, long long, id, id); static void (*_logos_orig$_ungrouped$SBAppSwitcherPageView$layoutSubviews)(_LOGOS_SELF_TYPE_NORMAL SBAppSwitcherPageView* _LOGOS_SELF_CONST, SEL); static void _logos_method$_ungrouped$SBAppSwitcherPageView$layoutSubviews(_LOGOS_SELF_TYPE_NORMAL SBAppSwitcherPageView* _LOGOS_SELF_CONST, SEL); static void _logos_method$_ungrouped$SBAppSwitcherPageView$swipeDown(_LOGOS_SELF_TYPE_NORMAL SBAppSwitcherPageView* _LOGOS_SELF_CONST, SEL); static void _logos_method$_ungrouped$SBAppSwitcherPageView$respring(_LOGOS_SELF_TYPE_NORMAL SBAppSwitcherPageView* _LOGOS_SELF_CONST, SEL); 
-static __inline__ __attribute__((always_inline)) __attribute__((unused)) Class _logos_static_class_lookup$BluetoothManager(void) { static Class _klass; if(!_klass) { _klass = objc_getClass("BluetoothManager"); } return _klass; }static __inline__ __attribute__((always_inline)) __attribute__((unused)) Class _logos_static_class_lookup$SBWiFiManager(void) { static Class _klass; if(!_klass) { _klass = objc_getClass("SBWiFiManager"); } return _klass; }
+@class SBAppSwitcherReusableSnapshotView; @class SBUIController; @class SBAppSwitcherPageView; 
+static void (*_logos_orig$_ungrouped$SBAppSwitcherReusableSnapshotView$layoutSubviews)(_LOGOS_SELF_TYPE_NORMAL SBAppSwitcherReusableSnapshotView* _LOGOS_SELF_CONST, SEL); static void _logos_method$_ungrouped$SBAppSwitcherReusableSnapshotView$layoutSubviews(_LOGOS_SELF_TYPE_NORMAL SBAppSwitcherReusableSnapshotView* _LOGOS_SELF_CONST, SEL); static void (*_logos_orig$_ungrouped$SBUIController$activateApplication$fromIcon$location$activationSettings$actions$)(_LOGOS_SELF_TYPE_NORMAL SBUIController* _LOGOS_SELF_CONST, SEL, id, id, long long, id, id); static void _logos_method$_ungrouped$SBUIController$activateApplication$fromIcon$location$activationSettings$actions$(_LOGOS_SELF_TYPE_NORMAL SBUIController* _LOGOS_SELF_CONST, SEL, id, id, long long, id, id); static void (*_logos_orig$_ungrouped$SBAppSwitcherPageView$layoutSubviews)(_LOGOS_SELF_TYPE_NORMAL SBAppSwitcherPageView* _LOGOS_SELF_CONST, SEL); static void _logos_method$_ungrouped$SBAppSwitcherPageView$layoutSubviews(_LOGOS_SELF_TYPE_NORMAL SBAppSwitcherPageView* _LOGOS_SELF_CONST, SEL); static void _logos_method$_ungrouped$SBAppSwitcherPageView$swipeDown(_LOGOS_SELF_TYPE_NORMAL SBAppSwitcherPageView* _LOGOS_SELF_CONST, SEL); static void _logos_method$_ungrouped$SBAppSwitcherPageView$respring(_LOGOS_SELF_TYPE_NORMAL SBAppSwitcherPageView* _LOGOS_SELF_CONST, SEL); 
+
 #line 49 "Tweak.xm"
-
-static void _logos_method$_ungrouped$CCUILabeledRoundButton$buttonTapped$(_LOGOS_SELF_TYPE_NORMAL CCUILabeledRoundButton* _LOGOS_SELF_CONST __unused self, SEL __unused _cmd, id arg1) {
-if ([self.title isEqualToString:[[NSBundle bundleWithPath:@"/System/Library/ControlCenter/Bundles/ConnectivityModule.bundle"] localizedStringForKey:@"CONTROL_CENTER_STATUS_AIRPLANE_MODE_NAME" value:@"CONTROL_CENTER_STATUS_AIRPLANE_MODE_NAME" table:@"Localizable"]]) {
-	LAContext *context = [[LAContext alloc] init];  
-		NSError *error = nil;  
-		NSString *reason = @"Please authenticate.";
-	if ([context canEvaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics error:&error]) {
-		   [context evaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics
-		       localizedReason:reason
-		           reply:^(BOOL success, NSError *error) {
-		           dispatch_async(dispatch_get_main_queue(), ^{
-		               if (success) {
-		                   _logos_orig$_ungrouped$CCUILabeledRoundButton$buttonTapped$(self, _cmd, arg1);
-		               } else {
-		                   		BluetoothManager *btoothManager = (BluetoothManager *)[_logos_static_class_lookup$BluetoothManager() sharedInstance];
-		                   		SBWiFiManager *wiFiManager = (SBWiFiManager *)[_logos_static_class_lookup$SBWiFiManager() sharedInstance];
-		                   		    	[btoothManager setPowered:YES];
-		                   		    	[btoothManager setEnabled:YES];
-		                   					[wiFiManager setWiFiEnabled:YES];
-		               }
-		           });
-		    }];
-		}
-	}
-if ([self.title isEqualToString:[[NSBundle bundleWithPath:@"/System/Library/ControlCenter/Bundles/ConnectivityModule.bundle"] localizedStringForKey:@"CONTROL_CENTER_STATUS_WIFI_NAME" value:@"CONTROL_CENTER_STATUS_WIFI_NAME" table:@"Localizable"]] || [self.title isEqualToString:[[NSBundle bundleWithPath:@"/System/Library/ControlCenter/Bundles/ConnectivityModule.bundle"] localizedStringForKey:@"CONTROL_CENTER_STATUS_WLAN_NAME" value:@"CONTROL_CENTER_STATUS_WLAN_NAME" table:@"Localizable"]]) {
-SBWiFiManager *wiFiManager = (SBWiFiManager *)[_logos_static_class_lookup$SBWiFiManager() sharedInstance];
-    BOOL enabled = [wiFiManager wiFiEnabled];
-
-    if(enabled) {
-        if ([self.title isEqualToString:[[NSBundle bundleWithPath:@"/System/Library/ControlCenter/Bundles/ConnectivityModule.bundle"] localizedStringForKey:@"CONTROL_CENTER_STATUS_AIRPLANE_MODE_NAME" value:@"CONTROL_CENTER_STATUS_AIRPLANE_MODE_NAME" table:@"Localizable"]]) {
-	LAContext *context = [[LAContext alloc] init];  
-		NSError *error = nil;  
-		NSString *reason = @"Please authenticate.";
-	if ([context canEvaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics error:&error]) {
-		   [context evaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics
-		       localizedReason:reason
-		           reply:^(BOOL success, NSError *error) {
-		           dispatch_async(dispatch_get_main_queue(), ^{
-		               if (success) {
-        				[wiFiManager setWiFiEnabled:NO];
-		               } else {
-		                   		BluetoothManager *btoothManager = (BluetoothManager *)[_logos_static_class_lookup$BluetoothManager() sharedInstance];
-		                   		SBWiFiManager *wiFiManager = (SBWiFiManager *)[_logos_static_class_lookup$SBWiFiManager() sharedInstance];
-		                   		    	[btoothManager setPowered:YES];
-		                   		    	[btoothManager setEnabled:YES];
-		                   					[wiFiManager setWiFiEnabled:YES];
-		               }
-		           });
-		    }];
-		}
-    }
-   } else {
-           if ([self.title isEqualToString:[[NSBundle bundleWithPath:@"/System/Library/ControlCenter/Bundles/ConnectivityModule.bundle"] localizedStringForKey:@"CONTROL_CENTER_STATUS_AIRPLANE_MODE_NAME" value:@"CONTROL_CENTER_STATUS_AIRPLANE_MODE_NAME" table:@"Localizable"]]) {
-	LAContext *context = [[LAContext alloc] init];  
-		NSError *error = nil;  
-		NSString *reason = @"Please authenticate.";
-	if ([context canEvaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics error:&error]) {
-		   [context evaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics
-		       localizedReason:reason
-		           reply:^(BOOL success, NSError *error) {
-		           dispatch_async(dispatch_get_main_queue(), ^{
-		               if (success) {
-        				[wiFiManager setWiFiEnabled:YES];
-		               } else {
-		                   		BluetoothManager *btoothManager = (BluetoothManager *)[_logos_static_class_lookup$BluetoothManager() sharedInstance];
-		                   		SBWiFiManager *wiFiManager = (SBWiFiManager *)[_logos_static_class_lookup$SBWiFiManager() sharedInstance];
-		                   		    	[btoothManager setPowered:YES];
-		                   		    	[btoothManager setEnabled:YES];
-		                   					[wiFiManager setWiFiEnabled:YES];
-		               }
-		           });
-		    }];
-		}
-    }
-   }
-
-if ([self.title isEqualToString:[[NSBundle bundleWithPath:@"/System/Library/ControlCenter/Bundles/ConnectivityModule.bundle"] localizedStringForKey:@"CONTROL_CENTER_STATUS_BLUETOOTH_NAME" value:@"CONTROL_CENTER_STATUS_BLUETOOTH_NAME" table:@"Localizable"]]) {
-    BluetoothManager *btoothManager = (BluetoothManager *)[_logos_static_class_lookup$BluetoothManager() sharedInstance];
-    BOOL enabled = [btoothManager enabled];
-
-    if(enabled) {
-	LAContext *context = [[LAContext alloc] init];  
-		NSError *error = nil;  
-		NSString *reason = @"Please authenticate.";
-	if ([context canEvaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics error:&error]) {
-		   [context evaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics
-		       localizedReason:reason
-		           reply:^(BOOL success, NSError *error) {
-		           dispatch_async(dispatch_get_main_queue(), ^{
-		               if (success) {
-        				[wiFiManager setWiFiEnabled:NO];
-		               } else {
-		                   		BluetoothManager *btoothManager = (BluetoothManager *)[_logos_static_class_lookup$BluetoothManager() sharedInstance];
-		                   		SBWiFiManager *wiFiManager = (SBWiFiManager *)[_logos_static_class_lookup$SBWiFiManager() sharedInstance];
-		                   		    	[btoothManager setPowered:YES];
-		                   		    	[btoothManager setEnabled:YES];
-		                   					[wiFiManager setWiFiEnabled:YES];
-		               }
-		           });
-		    }];
-		}
-    } else {
-	LAContext *context = [[LAContext alloc] init];  
-		NSError *error = nil;  
-		NSString *reason = @"Please authenticate.";
-	if ([context canEvaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics error:&error]) {
-		   [context evaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics
-		       localizedReason:reason
-		           reply:^(BOOL success, NSError *error) {
-		           dispatch_async(dispatch_get_main_queue(), ^{
-		               if (success) {
-        				[wiFiManager setWiFiEnabled:NO];
-		               } else {
-		                   		BluetoothManager *btoothManager = (BluetoothManager *)[_logos_static_class_lookup$BluetoothManager() sharedInstance];
-		                   		SBWiFiManager *wiFiManager = (SBWiFiManager *)[_logos_static_class_lookup$SBWiFiManager() sharedInstance];
-		                   		    	[btoothManager setPowered:YES];
-		                   		    	[btoothManager setEnabled:YES];
-		                   					[wiFiManager setWiFiEnabled:YES];
-		               }
-		           });
-		    }];
-		}
-	}
-
-  }
-}
-}
-
 NSString *swipeAppId;
 
 static void _logos_method$_ungrouped$SBAppSwitcherReusableSnapshotView$layoutSubviews(_LOGOS_SELF_TYPE_NORMAL SBAppSwitcherReusableSnapshotView* _LOGOS_SELF_CONST __unused self, SEL __unused _cmd) {
@@ -308,5 +180,5 @@ static void _logos_method$_ungrouped$SBAppSwitcherPageView$respring(_LOGOS_SELF_
 }
 
 static __attribute__((constructor)) void _logosLocalInit() {
-{Class _logos_class$_ungrouped$CCUILabeledRoundButton = objc_getClass("CCUILabeledRoundButton"); MSHookMessageEx(_logos_class$_ungrouped$CCUILabeledRoundButton, @selector(buttonTapped:), (IMP)&_logos_method$_ungrouped$CCUILabeledRoundButton$buttonTapped$, (IMP*)&_logos_orig$_ungrouped$CCUILabeledRoundButton$buttonTapped$);Class _logos_class$_ungrouped$SBAppSwitcherReusableSnapshotView = objc_getClass("SBAppSwitcherReusableSnapshotView"); MSHookMessageEx(_logos_class$_ungrouped$SBAppSwitcherReusableSnapshotView, @selector(layoutSubviews), (IMP)&_logos_method$_ungrouped$SBAppSwitcherReusableSnapshotView$layoutSubviews, (IMP*)&_logos_orig$_ungrouped$SBAppSwitcherReusableSnapshotView$layoutSubviews);Class _logos_class$_ungrouped$SBUIController = objc_getClass("SBUIController"); MSHookMessageEx(_logos_class$_ungrouped$SBUIController, @selector(activateApplication:fromIcon:location:activationSettings:actions:), (IMP)&_logos_method$_ungrouped$SBUIController$activateApplication$fromIcon$location$activationSettings$actions$, (IMP*)&_logos_orig$_ungrouped$SBUIController$activateApplication$fromIcon$location$activationSettings$actions$);Class _logos_class$_ungrouped$SBAppSwitcherPageView = objc_getClass("SBAppSwitcherPageView"); MSHookMessageEx(_logos_class$_ungrouped$SBAppSwitcherPageView, @selector(layoutSubviews), (IMP)&_logos_method$_ungrouped$SBAppSwitcherPageView$layoutSubviews, (IMP*)&_logos_orig$_ungrouped$SBAppSwitcherPageView$layoutSubviews);{ char _typeEncoding[1024]; unsigned int i = 0; _typeEncoding[i] = 'v'; i += 1; _typeEncoding[i] = '@'; i += 1; _typeEncoding[i] = ':'; i += 1; _typeEncoding[i] = '\0'; class_addMethod(_logos_class$_ungrouped$SBAppSwitcherPageView, @selector(swipeDown), (IMP)&_logos_method$_ungrouped$SBAppSwitcherPageView$swipeDown, _typeEncoding); }{ char _typeEncoding[1024]; unsigned int i = 0; _typeEncoding[i] = 'v'; i += 1; _typeEncoding[i] = '@'; i += 1; _typeEncoding[i] = ':'; i += 1; _typeEncoding[i] = '\0'; class_addMethod(_logos_class$_ungrouped$SBAppSwitcherPageView, @selector(respring), (IMP)&_logos_method$_ungrouped$SBAppSwitcherPageView$respring, _typeEncoding); }} }
-#line 284 "Tweak.xm"
+{Class _logos_class$_ungrouped$SBAppSwitcherReusableSnapshotView = objc_getClass("SBAppSwitcherReusableSnapshotView"); MSHookMessageEx(_logos_class$_ungrouped$SBAppSwitcherReusableSnapshotView, @selector(layoutSubviews), (IMP)&_logos_method$_ungrouped$SBAppSwitcherReusableSnapshotView$layoutSubviews, (IMP*)&_logos_orig$_ungrouped$SBAppSwitcherReusableSnapshotView$layoutSubviews);Class _logos_class$_ungrouped$SBUIController = objc_getClass("SBUIController"); MSHookMessageEx(_logos_class$_ungrouped$SBUIController, @selector(activateApplication:fromIcon:location:activationSettings:actions:), (IMP)&_logos_method$_ungrouped$SBUIController$activateApplication$fromIcon$location$activationSettings$actions$, (IMP*)&_logos_orig$_ungrouped$SBUIController$activateApplication$fromIcon$location$activationSettings$actions$);Class _logos_class$_ungrouped$SBAppSwitcherPageView = objc_getClass("SBAppSwitcherPageView"); MSHookMessageEx(_logos_class$_ungrouped$SBAppSwitcherPageView, @selector(layoutSubviews), (IMP)&_logos_method$_ungrouped$SBAppSwitcherPageView$layoutSubviews, (IMP*)&_logos_orig$_ungrouped$SBAppSwitcherPageView$layoutSubviews);{ char _typeEncoding[1024]; unsigned int i = 0; _typeEncoding[i] = 'v'; i += 1; _typeEncoding[i] = '@'; i += 1; _typeEncoding[i] = ':'; i += 1; _typeEncoding[i] = '\0'; class_addMethod(_logos_class$_ungrouped$SBAppSwitcherPageView, @selector(swipeDown), (IMP)&_logos_method$_ungrouped$SBAppSwitcherPageView$swipeDown, _typeEncoding); }{ char _typeEncoding[1024]; unsigned int i = 0; _typeEncoding[i] = 'v'; i += 1; _typeEncoding[i] = '@'; i += 1; _typeEncoding[i] = ':'; i += 1; _typeEncoding[i] = '\0'; class_addMethod(_logos_class$_ungrouped$SBAppSwitcherPageView, @selector(respring), (IMP)&_logos_method$_ungrouped$SBAppSwitcherPageView$respring, _typeEncoding); }} }
+#line 156 "Tweak.xm"
