@@ -9,7 +9,7 @@ ARCHS = arm64 arm64e
 Arch_FILES = Tweak.xm
 Arch_CFLAGS = -fobjc-arc
 Arch_LIBRARIES = sparkapplist
-
+THEOS_DEVICE_IP=10.1.10.248
 include $(THEOS_MAKE_PATH)/tweak.mk
 SUBPROJECTS += archpref
 include $(THEOS_MAKE_PATH)/aggregate.mk

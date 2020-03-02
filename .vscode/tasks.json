@@ -1,0 +1,85 @@
+{
+  // See https://go.microsoft.com/fwlink/?LinkId=733558
+  // for the documentation about the tasks.json format
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Build with Theos",
+      "type": "shell",
+      "command": "make",
+      "problemMatcher": {
+        "fileLocation": ["relative", "${workspaceFolder}"],
+        "pattern": {
+          "regexp": "^(.*):(\\d+):(\\d+):\\s+(warning|error):\\s+(.*)$",
+          "file": 1,
+          "line": 2,
+          "column": 3,
+          "severity": 4,
+          "message": 5
+        }
+      },
+      "group": {
+        "kind": "test",
+        "isDefault": true,
+      },
+      "windows": {
+        "options": {
+          "shell": {
+            "executable": "C:\\Windows\\System32\\bash.exe",
+            "args": [
+              "-i",
+              "-c"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "label": "Build & Install with Theos",
+      "type": "shell",
+      "command": "THEOS_DEVICE_IP=10.1.10.248 make do",
+      "problemMatcher": {
+        "fileLocation": ["relative", "${workspaceFolder}"],
+        "pattern": {
+          "regexp": "^(.*):(\\d+):(\\d+):\\s+(warning|error):\\s+(.*)$",
+          "file": 1,
+          "line": 2,
+          "column": 3,
+          "severity": 4,
+          "message": 5
+        }
+      },
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "windows": {
+        "options": {
+          "shell": {
+            "executable": "C:\\Windows\\System32\\bash.exe",
+            "args": [
+              "-i",
+              "-c"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "label": "Clean with Theos",
+      "type": "shell",
+      "command": "make clean",
+      "windows": {
+        "options": {
+          "shell": {
+            "executable": "C:\\Windows\\System32\\bash.exe",
+            "args": [
+              "-i",
+              "-c"
+            ]
+          }
+        }
+      }
+    }
+  ]
+}
