@@ -37,7 +37,7 @@
     {
       "label": "Build & Install with Theos",
       "type": "shell",
-      "command": "THEOS_DEVICE_IP=10.1.10.248 make do",
+      "command": "THEOS_DEVICE_IP=10.1.10.129 make do",
       "problemMatcher": {
         "fileLocation": ["relative", "${workspaceFolder}"],
         "pattern": {

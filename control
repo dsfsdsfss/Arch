@@ -1,7 +1,7 @@
 Package: com.machport.arch
 Name: Arch
 Depends: mobilesubstrate, preferenceloader, com.spark.libsparkapplist
-Version: 1.2.4.1
+Version: 1.3
 Architecture: iphoneos-arm
 Description: Restrics access to certain apps, Configurable in settings
 Maintainer: machport

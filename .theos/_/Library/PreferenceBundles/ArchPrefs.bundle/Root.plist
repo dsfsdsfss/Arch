@@ -30,6 +30,28 @@
 			<key>label</key>
 			<string>Enable Confirmation Noise</string>
 		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<false/>
+			<key>defaults</key>
+			<string>com.machport.archprefs</string>
+			<key>key</key>
+			<string>textenabled</string>
+			<key>label</key>
+			<string>Enable Custom Authenticaion Prompt</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+    		<string>PSEditTextCell</string>
+			<key>placeholder</key>
+			<string>Custom Authentication Prompt Text</string>
+			<key>defaults</key>
+			<string>com.machport.archprefs</string>
+			<key>key</key>
+			<string>kcustomtext</string>
+		</dict>
 	</array>
 	<key>title</key>
 	<string>Arch</string>
